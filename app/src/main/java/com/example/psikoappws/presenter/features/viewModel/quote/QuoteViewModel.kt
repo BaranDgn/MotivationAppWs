@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.psikoappws.data.model.QuoteItem
+import com.example.psikoappws.data.model.StoreFavQuote
 import com.example.psikoappws.data.repository.QuoteRepository
 import com.example.psikoappws.domain.repository.StoreQuoteRepository
 import com.example.psikoappws.domain.util.Resource
@@ -36,6 +37,12 @@ class QuoteViewModel@Inject constructor(
             storeQuote.uploadQuote(ctx, favText.value.toString(), favAuthor.value.toString())
         }
     }
+    fun deleteMyQuote(deleted: StoreFavQuote){
+        viewModelScope.launch {
+            storeQuote.deleteMyQuote(deleted)
+        }
+    }
+
 
     fun loadQuotes(){
         viewModelScope.launch{
@@ -64,9 +71,5 @@ class QuoteViewModel@Inject constructor(
                 else -> Unit
             }
         }
-
-
     }
-
-
 }

@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.psikoappws.data.model.QuoteItem
+import com.example.psikoappws.data.model.StoreFavQuote
 import com.example.psikoappws.presenter.features.viewModel.quote.QuoteViewModel
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.delay
@@ -157,10 +158,11 @@ fun QuoteScreen(
                 ) {
                     Box(contentAlignment = Alignment.TopEnd,
                         modifier = Modifier
-                            .fillMaxWidth()
+                            .fillMaxWidth()//.height(90.dp)
                             .padding(16.dp, 16.dp, 16.dp, 16.dp),
 
                         ){
+                        /*
                         IconButton(onClick = {
                             textOf.value = shuffledQuote[page].text.toString()
                             authorOf.value = shuffledQuote[page].author.toString()
@@ -175,6 +177,19 @@ fun QuoteScreen(
                                     .padding(16.dp)
                             )
                         }
+                        */
+
+                        DisplayToggleButton(
+                            onSave = {
+                                textOf.value = shuffledQuote[page].text.toString()
+                                authorOf.value = shuffledQuote[page].author.toString()
+                                viewModel.storeFavQuote(context, textOf.value, authorOf.value)
+                            },
+                            onDelete = {
+                                //viewModel.deleteMyQuote()
+
+                            }
+                        )
 
                     }
                     Spacer(modifier = Modifier.height(60.dp))

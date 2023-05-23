@@ -16,11 +16,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.psikoappws.BottomBarScreen
 import com.example.psikoappws.presenter.features.component.DiaryItem
 import com.example.psikoappws.presenter.features.component.OrderSection
 import com.example.psikoappws.presenter.features.diary.DiaryEvents

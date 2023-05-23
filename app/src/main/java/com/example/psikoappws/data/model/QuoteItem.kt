@@ -5,6 +5,4 @@ import java.util.UUID
 data class QuoteItem(
     var text : String?,
     var author : String?,
-    //var imageUrl: String?,
-    //val uudi : UUID
 )

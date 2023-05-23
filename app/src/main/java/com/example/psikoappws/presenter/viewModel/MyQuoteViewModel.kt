@@ -1,6 +1,7 @@
 package com.example.psikoappws.presenter.viewModel
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
@@ -9,6 +10,9 @@ import com.example.psikoappws.data.model.StoreFavQuote
 import com.example.psikoappws.domain.repository.StoreQuoteRepository
 import com.example.psikoappws.domain.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,6 +23,7 @@ class MyQuoteViewModel@Inject constructor(
 
     var listOfFavoriteQuotes = mutableStateOf<List<StoreFavQuote>>(listOf())
 
+    var getFavJob : Job?=null
 
 
     //val context = LocalContext.current
@@ -26,16 +31,17 @@ class MyQuoteViewModel@Inject constructor(
         getFavQuotes()
     }
 
-    fun deleteMyQuote(deleted: StoreFavQuote?){
+    fun deleteMyQuote(deleted: StoreFavQuote){
         viewModelScope.launch {
-            if (deleted != null) {
-                read.deleteMyQuote(deleted)
-            }
+            read.deleteMyQuote(deleted)
         }
     }
 
     fun getFavQuotes(){
-        viewModelScope.launch {
+        getFavJob?.cancel()
+        getFavJob = viewModelScope.launch {
+            getFavJob?.cancel()
+
             val result = read.readQuote()
 
             when(result){

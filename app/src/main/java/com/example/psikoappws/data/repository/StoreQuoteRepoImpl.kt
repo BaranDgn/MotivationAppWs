@@ -33,21 +33,39 @@ class StoreQuoteRepoImpl@Inject constructor(
     var quoteArrayList: ArrayList<StoreFavQuote> = ArrayList()
 
     override suspend fun uploadQuote(ctx : Context, text: String, author: String) {
-        val postMap = hashMapOf<String, Any>()
-        postMap.put("text", text)
-        postMap.put("author", author)
-        postMap.put("date", Timestamp.now())
+        firestore.collection("quote")
+            .whereEqualTo("text", text)
+            .whereEqualTo("author", author)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                if (querySnapshot.isEmpty) {
+                    // Quote does not exist, proceed with upload
+                    val postMap = hashMapOf<String, Any>()
+                    postMap.put("text", text)
+                    postMap.put("author", author)
+                    postMap.put("date", Timestamp.now())
 
-        firestore.collection("quote").add(postMap).addOnSuccessListener {
-            it
-
-        }.addOnFailureListener {
-            Toast.makeText(ctx, it.localizedMessage, Toast.LENGTH_LONG).show()
-        }
+                    firestore.collection("quote")
+                        .add(postMap)
+                        .addOnSuccessListener {
+                            // Quote uploaded successfully
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(ctx, it.localizedMessage, Toast.LENGTH_LONG).show()
+                        }
+                } else {
+                    // Quote already exists
+                    Toast.makeText(ctx, "Quote already exists", Toast.LENGTH_LONG).show()
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(ctx, it.localizedMessage, Toast.LENGTH_LONG).show()
+            }
     }
 
-    override suspend fun readQuote() :Resource<List<StoreFavQuote>>
+    override suspend fun readQuote() : Resource<List<StoreFavQuote>>
     {
+
         /*
         firestore.collection("quote").addSnapshotListener { value, error ->
             if(error != null){
@@ -72,22 +90,28 @@ class StoreQuoteRepoImpl@Inject constructor(
         }
         return Resource.Success(quoteArrayList)*/
 
-        firestore.collection("quote")
-            .orderBy("date", Query.Direction.DESCENDING).get()
-            .addOnSuccessListener { result ->
-                if (result != null) {
-                    if(!result.isEmpty){
-                for (doc in result) {
-                    val text = doc.get("text") as String
-                    val author = doc.get("author") as String
-                    val date = doc.getTimestamp("date")?.toDate()
+    return try {
+        //quoteArrayList.clear()
+        val querySnapShot = firestore.collection("quote")
+            .orderBy("date", Query.Direction.DESCENDING)
+            .get().await()
+                val quoteList = mutableListOf<StoreFavQuote>()
 
-                    val favQuotes = StoreFavQuote(text, author, date.toString())
-                    quoteArrayList?.add(favQuotes)
-                }
-            }}
-            }.addOnFailureListener { Log.d(TAG, "Error getting documnets") }
-        return Resource.Success(quoteArrayList)
+        if (querySnapShot != null) {
+            for (doc in querySnapShot) {
+                val text = doc.getString("text") ?: ""
+                val author = doc.getString("author") ?: ""
+                val date = doc.getTimestamp("date")?.toDate()?.toString() ?: ""
+
+                val favQuotes = StoreFavQuote(text, author, date)
+                quoteList.add(favQuotes)
+            }
+        }
+
+        Resource.Success(quoteList)
+    } catch (e: Exception) {
+        Resource.Error(e.localizedMessage ?: "Failed to fetch quotes")
+    }
 
     }
 
@@ -100,35 +124,21 @@ class StoreQuoteRepoImpl@Inject constructor(
             .whereEqualTo("author", storeFavQuote.author)
             .get().await()
 
-        if(favQuote?.documents!!.isNotEmpty()){
-            for(doc in favQuote){
-                try{
-                    quoteRef.document(doc.id).delete().await()
-                    //quoteRef.document(doc.id).update(
-                    //    mapOf("text" to FieldValue.delete())
-                    //)
+        if (favQuote != null) {
+            if (!favQuote.isEmpty) {
+                for (document in favQuote.documents) {
+                    try {
+                        quoteRef.document(document.id).delete().await()
+                        // Alternatively, you can use update with FieldValue.delete() to only delete the "text" field
+                        // quoteRef.document(document.id).update("text", FieldValue.delete())
 
-
-                }catch (e: Exception){
-                    withContext(Dispatchers.Main){
-                        //Toast.makeText()
+                    } catch (e: Exception) {
+                        // Handle exception
                     }
                 }
             }
         }
-
-
     }
-
 
 }
 
-
-/*  var storageRef = FirebaseStorage.getInstance().reference
-
-        var desertRef = storageRef.child("quote/${storeFavQuote}")
-        desertRef.delete().addOnSuccessListener {
-            // File deleted successfully
-        }.addOnFailureListener {
-            // Uh-oh, an error occurred!
-        }*/

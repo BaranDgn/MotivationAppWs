@@ -37,9 +37,6 @@ fun DailyQuoteItem(
     modifier: Modifier,
     cornerRadius: Dp = 10.dp,
     cutCornerSize: Dp = 30.dp,
-   //quote: DailyQuote,
-    //dailyQuote: List<DailyQuote>
-    //homeViewModel: HomeViewModel = hiltViewModel()
     textq:String,
     author: String
 

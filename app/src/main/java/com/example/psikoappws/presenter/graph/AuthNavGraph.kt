@@ -1,9 +1,7 @@
 package com.example.psikoappws.presenter.graph
 
-import androidx.compose.runtime.Composable
 import androidx.navigation.*
 import androidx.navigation.compose.composable
-import com.example.psikoappws.Screens
 import com.example.psikoappws.presenter.authenticaiton.LoginScreen
 import com.example.psikoappws.presenter.authenticaiton.SignUpScreen
 import com.example.psikoappws.presenter.opening.WelcomeScreen

@@ -13,8 +13,6 @@ import kotlinx.coroutines.CoroutineScope
 interface StoreQuoteRepository {
 
     val firestore : FirebaseFirestore
-   // val storage : FirebaseStorage
-
     suspend fun uploadQuote(ctx : Context, text: String, author : String)
 
     suspend fun readQuote() : Resource<List<StoreFavQuote>>

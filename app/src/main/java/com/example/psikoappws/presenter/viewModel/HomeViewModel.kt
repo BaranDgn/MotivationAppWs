@@ -26,8 +26,6 @@ class HomeViewModel @Inject constructor(
     var errorMessage = mutableStateOf("")
     var isLoading = mutableStateOf(false)
 
-    //val color = mutableStateOf<List<DailyQuote>>(listOf())
-
 
     init{
         getDailyQuote()
@@ -39,8 +37,6 @@ class HomeViewModel @Inject constructor(
     //1- buradaki fonksiyonu suspend fun yapar geri kalan işlemleri view da yaparaız.
     //2- viewmodelScope.launch(){} içinde çağırabiliriz.
     //Her 2 yolunda belli bedelleri var.
-
-
 
     fun getDailyQuote(){
         viewModelScope.launch {
@@ -68,37 +64,4 @@ class HomeViewModel @Inject constructor(
 
         }
     }
-
-
-    /*
-    fun loadDAilyQuote(){
-        viewModelScope.launch {
-            isLoading.value = true
-
-            val result = repo.loadQuotes()
-
-            //mapIndexed --> kullanılacak seyde bir liste varsa, ve bu liste tek tek elemana çevirmek için kullanılır. foreach{} benzer.
-            when(result){
-                is Resource.Success -> {
-                   val quoteItems = result.data!!.mapIndexed { index, quoteItem ->
-                       DailyQuote(
-                            quoteItem.text,
-                           quoteItem.author
-                       )
-                   } as List<DailyQuote>
-
-
-                    errorMessage.value = ""
-                    isLoading.value = false
-                    quoteDailyList.value += quoteItems
-
-                }
-                is Resource.Error ->{
-                    errorMessage.value = result.message!!
-                    isLoading.value = false
-                }
-                else -> Unit
-            }
-        }
-    }*/
 }

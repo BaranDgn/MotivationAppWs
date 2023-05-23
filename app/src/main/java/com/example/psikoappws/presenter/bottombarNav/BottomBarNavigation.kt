@@ -1,6 +1,5 @@
 package com.example.psikoappws.presenter.bottombarNav
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
@@ -16,7 +15,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.psikoappws.BottomBarScreen
-import com.example.psikoappws.R
 import com.example.psikoappws.presenter.graph.HomeNavGraph
 
 

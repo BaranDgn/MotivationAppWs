@@ -4,7 +4,6 @@ import androidx.room.*
 import com.example.psikoappws.data.model.Diary
 import kotlinx.coroutines.flow.Flow
 
-
 @Dao
 interface DiaryDao {
 

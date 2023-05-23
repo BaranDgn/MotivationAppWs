@@ -44,8 +44,6 @@ import java.util.*
 fun HomeScreen(
     navController: NavHostController = rememberNavController(),
     homeViewModel : HomeViewModel = hiltViewModel()
-    //onClick:() -> Unit
-   // dailyQuote: DailyQuote
 
 ) {
 
@@ -53,10 +51,7 @@ fun HomeScreen(
         homeViewModel.quoteDailyList
     }
     val textOne = qList.shuffled().takeLast(1).takeLast(2).takeLast(3)
-
-    //val author = qList.shuffled().takeLast(2)
-
-    //var shuffedList  = qList.shuffled().first()
+    
 
     val scrollState = rememberScrollState()
 

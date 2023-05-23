@@ -11,7 +11,6 @@ data class Diary(
     val color: Int,
     @PrimaryKey val id: Int? = null
 ){
-
     companion object{
         val diaryColors = listOf(
             RedOrange,

@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun CardView(
-    //modifier: Modifier,
     painter: Painter,
     contentDescription: String,
     title: String,

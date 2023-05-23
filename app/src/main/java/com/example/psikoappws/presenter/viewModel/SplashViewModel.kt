@@ -3,17 +3,11 @@ package com.example.psikoappws.presenter.viewModel
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.psikoappws.BottomBarScreen
-import com.example.psikoappws.Screens
 import com.example.psikoappws.domain.repository.AuthRepository
-import com.example.psikoappws.presenter.authenticaiton.AuthViewModel
 import com.example.psikoappws.presenter.graph.AuthScreen
-import com.example.psikoappws.presenter.graph.Graph
 import com.example.psikoappws.presenter.opening.DataStoreRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 import kotlinx.coroutines.launch
 import javax.inject.Inject
