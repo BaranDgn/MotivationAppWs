@@ -43,13 +43,22 @@ fun QuoteScreen(
     viewModel: QuoteViewModel = hiltViewModel()
 ) {
 
-   val image = mutableListOf(
+   val image = listOf(
        R.drawable.quoteone,
+       R.drawable.quotefive,
+       R.drawable.quotesix,
+       R.drawable.quotenineteen,
+       R.drawable.quoteseventeen,
+       R.drawable.quotesixteen,
+       R.drawable.quoteten,
+       R.drawable.quotethirteen,
+       R.drawable.quotetwelvw,
+       R.drawable.quotetwenty,
        R.drawable.quotethree,
        R.drawable.quotefour,
-       R.drawable.quotefive,
-       R.drawable.quotesix
    )
+
+    val currentIndex = remember{ mutableStateOf(0) }
     val rnds = (0..5).random()
 
     val context = LocalContext.current
@@ -69,19 +78,28 @@ fun QuoteScreen(
         }
     }
 
+    LaunchedEffect(Unit){
+        while (true){
+            delay(10000)
+
+            currentIndex.value = (currentIndex.value + 1) % image.size
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFFE2DED0)),
         contentAlignment = Alignment.Center
     ){
-        Crossfade(
-            targetState = true ,
-            animationSpec = tween(1000)
-        ) { targetState ->
 
+        AnimatedVisibility(
+            visible = true,
+            enter = fadeIn() + slideInVertically(),
+            exit = fadeOut() + slideOutVertically()
+        ) {
             Image(
-                painter = painterResource(if (targetState) image[4] else image[1]),
+                painter = painterResource(image[currentIndex.value]),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxSize(),
@@ -89,16 +107,6 @@ fun QuoteScreen(
             )
         }
 
-
-        /*Image(
-            painter = painterResource(image[4]),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxSize(),
-            contentScale = ContentScale.FillBounds
-        )*/
-        
-        
         HorizontalPager(
             state = pagerState,
             count = viewModel.quoteOfList.value.size,
@@ -162,22 +170,6 @@ fun QuoteScreen(
                             .padding(16.dp, 16.dp, 16.dp, 16.dp),
 
                         ){
-                        /*
-                        IconButton(onClick = {
-                            textOf.value = shuffledQuote[page].text.toString()
-                            authorOf.value = shuffledQuote[page].author.toString()
-                            viewModel.storeFavQuote(context, textOf.value, authorOf.value)
-
-                            //Toast.makeText(ctx, "It's logged out", Toast.LENGTH_SHORT).show()
-                        })
-                        {
-                            Icon(ImageVector.vectorResource(id = R.drawable.star), null,
-                                modifier = Modifier
-                                    .size(60.dp)
-                                    .padding(16.dp)
-                            )
-                        }
-                        */
 
                         DisplayToggleButton(
                             onSave = {

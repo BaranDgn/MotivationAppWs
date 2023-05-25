@@ -52,7 +52,7 @@ fun DisplayToggleButton(
             val transition = updateTransition(checkedState.value, label = "")
 
             val tint by transition.animateColor(label = "iconColor") { isChecked ->
-                if (isChecked) Color.DarkGray else Color.Black
+                if (isChecked) Color.Red else Color.Red
             }
 
             val size by transition.animateDp(

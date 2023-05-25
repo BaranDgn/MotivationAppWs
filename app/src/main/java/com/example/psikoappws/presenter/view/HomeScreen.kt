@@ -128,38 +128,6 @@ fun HomeScreen(
             }
 
         }
-
-       //Divider(color = Color.Gray, thickness = 1.dp, modifier = Modifier.padding(16.dp,0.dp,16.dp,2.dp))
-
-
-        //Daily Quotes
-        /*Column(modifier = Modifier.fillMaxWidth()) {
-            Text(
-                text = "DAILY QUOTE",
-                fontSize = 24.sp,
-                modifier = Modifier
-                    .align(Alignment.Start)
-                    .padding(16.dp, 8.dp, 8.dp, 0.dp)
-            )
-            //NoteItem
-                DailyQuoteItem(
-                 //   dailyQuote = dailyQuote,
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth()
-                        .height(200.dp)
-                        .clickable {
-                        },
-                    //replaceAll("\[|\]", "")
-                    textq = textOne.mapIndexed { index, dailyQuote ->
-                        dailyQuote.text?.replaceFirst(".$".toRegex(), "")?.dropLast(1)
-                    }.toString()
-                        , author =  textq.mapIndexed { index, dailyQuote ->
-                        dailyQuote.author.toString()
-                    }.toString()
-                )
-
-        }*/
         //Quotes
         Column(modifier = Modifier.fillMaxWidth()) {
             Text(
@@ -228,10 +196,9 @@ fun SliderPage(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
 
-    val qList by remember{
-        homeViewModel.quoteDailyList
-    }
-    val textOne = qList.shuffled().takeLast(1).takeLast(2).takeLast(3)
+    val qList = remember{ homeViewModel.quoteDailyList }
+
+    val textOne = qList.value.shuffled().takeLast(1).takeLast(2).takeLast(3)
 
     Box(
         modifier = Modifier
@@ -251,7 +218,7 @@ fun SliderPage(
             modifier = Modifier
                 .fillMaxWidth(),
             text = textOne.mapIndexed { index, dailyQuote ->
-                dailyQuote.text?.replaceFirst(".$".toRegex(), "")?.dropLast(1)
+                dailyQuote.text?.replaceFirst(".$".toRegex(), "")
             }.toString(),
             fontSize = MaterialTheme.typography.h6.fontSize,
             textAlign = TextAlign.Center,
