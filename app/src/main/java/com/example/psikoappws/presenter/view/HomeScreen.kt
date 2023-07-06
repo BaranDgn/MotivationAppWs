@@ -61,8 +61,6 @@ fun HomeScreen(
         HomeSlider.Three
     )
 
-    val context = LocalContext.current
-    val pages = ArrayList<QuoteItem>()
     val pagerState = rememberPagerState(
        // initialPage = 1
     )
@@ -131,7 +129,7 @@ fun HomeScreen(
         //Quotes
         Column(modifier = Modifier.fillMaxWidth()) {
             Text(
-                text = "QUOTEs",
+                text = "QUOTE",
                 fontSize = 24.sp,
                 modifier = Modifier
                     .align(Alignment.Start)
@@ -171,7 +169,7 @@ fun HomeScreen(
         //Chat
         Column(modifier = Modifier.fillMaxWidth()) {
             Text(
-                text = "TALK IF YOU NEED",
+                text = "CHAT ROBOT",
                 fontSize = 24.sp,
                 modifier = Modifier
                     .align(Alignment.Start)

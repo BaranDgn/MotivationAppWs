@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DiaryDao {
-
     @Query("SELECT * FROM diary")
     fun getDiary() : Flow<List<Diary>>
 

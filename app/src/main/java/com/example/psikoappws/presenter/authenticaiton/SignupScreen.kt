@@ -38,7 +38,6 @@ import com.example.psikoappws.ui.theme.Shapes
 @Composable
 fun SignUpScreen(
     navController: NavController,
-    //onClick: () -> Unit,
     viewModel: AuthViewModel = hiltViewModel()
 ) {
     val passwordFocusRequester = FocusRequester()

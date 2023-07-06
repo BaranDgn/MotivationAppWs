@@ -19,9 +19,7 @@ import com.example.psikoappws.presenter.graph.HomeNavGraph
 
 
 @Composable
-fun BottomBarNavigation(
-
-){
+fun BottomBarNavigation(){
     val navController = rememberNavController()
 
     val scaffoldState = rememberScaffoldState()
@@ -56,7 +54,6 @@ fun BottomNavBar(navController: NavHostController) {
                     navController = navController
                 )
             }
-
         }
     }
 }

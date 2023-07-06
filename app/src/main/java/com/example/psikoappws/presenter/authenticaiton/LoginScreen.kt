@@ -43,7 +43,6 @@ import com.example.psikoappws.ui.theme.Shapes
 @Composable
 fun LoginScreen(
     navController: NavController,
-    //onClick : () -> Unit,
     signUpClick: () -> Unit,
     viewModel: AuthViewModel = hiltViewModel()
 ) {
@@ -219,7 +218,7 @@ sealed class InputType(
     val visualTransformation: VisualTransformation
 ){
     object UserName : InputType(
-        label = "UserName",
+        label = "Email",
         icon = Icons.Default.Person,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.None),
         visualTransformation = VisualTransformation.None
@@ -230,5 +229,4 @@ sealed class InputType(
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done, keyboardType = KeyboardType.Password),
         visualTransformation = PasswordVisualTransformation()
     )
-
 }

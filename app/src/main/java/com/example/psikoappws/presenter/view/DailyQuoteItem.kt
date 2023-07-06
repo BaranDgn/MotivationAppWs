@@ -116,7 +116,6 @@ fun DailyQuoteItem(
                 maxLines = 10,
                 //this will cut off when it gets too long
                 overflow = TextOverflow.Ellipsis,
-              //  modifier = Modifier.align(Alignment.CenterHorizontally)
             )
         }
     }

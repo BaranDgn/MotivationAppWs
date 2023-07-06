@@ -29,9 +29,7 @@ class StoreQuoteRepoImpl@Inject constructor(
 
     override val firestore: FirebaseFirestore = Firebase.firestore
 
-
     var quoteArrayList: ArrayList<StoreFavQuote> = ArrayList()
-
     override suspend fun uploadQuote(ctx : Context, text: String, author: String) {
         firestore.collection("quote")
             .whereEqualTo("text", text)
@@ -65,30 +63,6 @@ class StoreQuoteRepoImpl@Inject constructor(
 
     override suspend fun readQuote() : Resource<List<StoreFavQuote>>
     {
-
-        /*
-        firestore.collection("quote").addSnapshotListener { value, error ->
-            if(error != null){
-              //  Toast.makeText(ctx, error.localizedMessage, Toast.LENGTH_LONG).show()
-            }else{
-                if(value != null){
-                    if(!value.isEmpty){
-                        val document = value!!.documents
-                        for(doc in document){
-                            val text = doc.get("text") as String
-                            val author = doc.get("author") as String
-                            val date = doc.getTimestamp("date")?.toDate()
-
-                            val favQuotes = StoreFavQuote(text, author, date.toString())
-                            quoteArrayList?.add(favQuotes)
-
-                        }
-
-                    }
-                }
-            }
-        }
-        return Resource.Success(quoteArrayList)*/
 
     return try {
         //quoteArrayList.clear()
@@ -139,6 +113,5 @@ class StoreQuoteRepoImpl@Inject constructor(
             }
         }
     }
-
 }
 

@@ -8,6 +8,7 @@ import com.example.psikoappws.data.repository.AuthRepositoryImpl
 import com.example.psikoappws.data.repository.DiaryRepositoryImpl
 import com.example.psikoappws.data.repository.QuoteRepository
 import com.example.psikoappws.data.repository.StoreQuoteRepoImpl
+import com.example.psikoappws.data.service.ChatBotService
 import com.example.psikoappws.data.service.QuoteService
 import com.example.psikoappws.domain.repository.AuthRepository
 import com.example.psikoappws.domain.repository.DiaryRepository
@@ -92,7 +93,4 @@ object AppModule {
             .build()
             .create(QuoteService::class.java)
     }
-
-
-
 }

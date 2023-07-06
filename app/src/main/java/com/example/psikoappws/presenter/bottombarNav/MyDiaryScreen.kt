@@ -64,7 +64,7 @@ fun MyDiaryScreen(
                 verticalAlignment = Alignment.CenterVertically
             ){
                 Text(
-                    text = "Your Diarys",
+                    text = "My Diaries",
                     style = MaterialTheme.typography.h4
                 )
                 IconButton(onClick = {

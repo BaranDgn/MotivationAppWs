@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.map
 class GetDiary(
     private val repo : DiaryRepository
 ) {
-
     operator fun invoke(
         diaryOrder: DiaryOrder = DiaryOrder.Date(OrderType.Descending)
     ): Flow<List<Diary>>{
@@ -29,7 +28,6 @@ class GetDiary(
                     }
                 }
             }
-
         }
 
     }

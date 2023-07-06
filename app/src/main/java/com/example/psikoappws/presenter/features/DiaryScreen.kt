@@ -57,8 +57,6 @@ fun DiaryScreen(
     navController: NavController,
     viewModel : AddEditDiaryViewModel = hiltViewModel(),
     diaryColor : Int,
-    callback: () -> Unit = {}
-
 ){
    /* BackHandler(enabled = true){
         if()
@@ -76,6 +74,8 @@ fun DiaryScreen(
         )
 
     }
+    val scope = rememberCoroutineScope()
+
 
     //val scope = rememberCoroutineScope()
 
@@ -111,7 +111,7 @@ fun DiaryScreen(
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize().background(dairyBackgroundAnimatable.value)
             .padding(8.dp)
             .verticalScroll(scrollState)
     ) {
@@ -145,11 +145,52 @@ fun DiaryScreen(
 
             )
         }
+        Spacer(modifier = Modifier.height(10.dp))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ){
+            Diary.PageColors.forEach { color ->
+                val colorInt = color.toArgb()
+
+                //color bubbles fpr color chose
+                Box(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .shadow(15.dp, CircleShape)
+                        .clip(CircleShape)
+                        .background(color)
+                        .border(
+                            width = 3.dp,
+                            color = if (viewModel.diaryColor.value == colorInt) Color.Black
+                            else Color.Transparent,
+                            shape = CircleShape
+                        )
+                        .clickable {
+                            scope.launch {
+                                dairyBackgroundAnimatable.animateTo(
+                                    targetValue = Color(colorInt),
+                                    animationSpec = tween(
+                                        durationMillis = 500
+                                    )
+                                )
+                            }
+                            viewModel.onEvent(AddEditDiaryEvent.ChangeColor(colorInt))
+                        }
+
+                ){
+
+                }
+            }
+
+        }
         Spacer(modifier = Modifier.height(20.dp))
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .background(dairyBackgroundAnimatable.value)
+                .fillMaxSize()
+                //.background(dairyBackgroundAnimatable.value)
                 .padding(16.dp)
         ) {
 
@@ -166,7 +207,7 @@ fun DiaryScreen(
                 textStyle = MaterialTheme.typography.body1,
                 modifier = Modifier
                     .fillMaxHeight()
-                    .background(Color(0xffFBFCF8)).verticalScroll(scrollState)
+                    .verticalScroll(scrollState)
             )
 
 

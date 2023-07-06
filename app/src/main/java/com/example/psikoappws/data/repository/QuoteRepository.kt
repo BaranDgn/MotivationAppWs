@@ -10,7 +10,6 @@ import javax.inject.Inject
 class QuoteRepository@Inject constructor(
     private val api : QuoteService
 ) {
-
     suspend fun loadQuotes() : Resource<Quote>{
         val response = try{
             api.getQuote()

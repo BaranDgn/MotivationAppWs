@@ -33,7 +33,7 @@ fun HomeNavGraph(navController: NavHostController) {
             MyDiaryScreen(navController = navController)
         }
         composable(route = BottomBarScreen.Setting.route) {
-            SettingScreen(navController = navController)
+            SettingScreen()
         }
         featureNavGraph(navController = navController)
         authNavGraph(navController, AuthScreen.Login.route)

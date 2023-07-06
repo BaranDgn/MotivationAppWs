@@ -7,14 +7,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import com.example.psikoappws.R
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -32,6 +32,7 @@ import com.example.psikoappws.presenter.features.viewModel.quote.QuoteViewModel
 import com.google.accompanist.pager.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.yield
+import java.time.format.TextStyle
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
@@ -46,8 +47,6 @@ fun QuoteScreen(
    val image = listOf(
        R.drawable.quoteone,
        R.drawable.quotefive,
-       R.drawable.quotesix,
-       R.drawable.quotenineteen,
        R.drawable.quoteseventeen,
        R.drawable.quotesixteen,
        R.drawable.quoteten,
@@ -55,7 +54,6 @@ fun QuoteScreen(
        R.drawable.quotetwelvw,
        R.drawable.quotetwenty,
        R.drawable.quotethree,
-       R.drawable.quotefour,
    )
 
     val currentIndex = remember{ mutableStateOf(0) }
@@ -187,10 +185,26 @@ fun QuoteScreen(
                     Spacer(modifier = Modifier.height(60.dp))
                     
                     Box(contentAlignment = Alignment.Center) {
-                        Text(text = "${shuffledQuote[page].text}",
+                        val quote = shuffledQuote[page].text
+                        Text(text = quote.toString(),
                             fontSize = 22.sp,
+                            color = Color.DarkGray,
                             modifier = Modifier.padding(16.dp)
+                                .offset(
+                                    x = 2.dp,
+                                    y = 2.dp
+                                )
+                                .alpha(1f) //0.75f
                         )
+                        Text(
+                            text = quote.toString(),
+                            fontSize = 22.sp,
+                            color = Color.White,
+                            modifier = Modifier.padding(16.dp)
+
+                        )
+
+                            //modifier = Modifier.padding(16.dp)
                     }
 
                     Box(contentAlignment = Alignment.CenterEnd) {

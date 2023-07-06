@@ -4,7 +4,6 @@ import com.example.psikoappws.ui.theme.*
 
 data class DailyQuote(
     var text : String?
-   // val color: Int
 ){
 
 }

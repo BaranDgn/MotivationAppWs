@@ -34,7 +34,7 @@ fun MyQuoteScreen(
         .padding(12.dp, 16.dp, 12.dp, 64.dp)
     ) {
         Text(
-            text = "Your Quotes",
+            text = "My Quotes",
             style = MaterialTheme.typography.h4
 
         )

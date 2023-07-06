@@ -23,6 +23,15 @@ data class Diary(
             Pewter,
             Yellow,
             Coral
+        )
+        val PageColors = listOf(
+
+            LightGreen,
+            BabyBlue,
+            SeaFoam,
+            DustyRose,
+            BlueGray,
+            Pewter,
 
         )
     }

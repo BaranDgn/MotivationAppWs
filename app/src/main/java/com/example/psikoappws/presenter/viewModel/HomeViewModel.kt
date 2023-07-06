@@ -1,6 +1,7 @@
 package com.example.psikoappws.presenter.viewModel
 
 import androidx.compose.animation.core.tween
+import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
@@ -27,6 +28,9 @@ class HomeViewModel @Inject constructor(
     var isLoading = mutableStateOf(false)
 
 
+
+
+
     init{
         getDailyQuote()
     }
@@ -34,7 +38,7 @@ class HomeViewModel @Inject constructor(
     //Repo dan gelen loadQuotes() suspend bir corountine fonksiyonu oldugu icin
     //duz bir fonksiyon icersinde kullanamayız.
     //2 yol var bunu kullanabilmek için.
-    //1- buradaki fonksiyonu suspend fun yapar geri kalan işlemleri view da yaparaız.
+    //1- buradaki fonksiyonu suspend fun yapar geri kalan işlemleri view da yaparız.
     //2- viewmodelScope.launch(){} içinde çağırabiliriz.
     //Her 2 yolunda belli bedelleri var.
 
@@ -48,9 +52,7 @@ class HomeViewModel @Inject constructor(
                         DailyQuote(
                             item.text,
                         )
-
                     }
-
                     isLoading.value = false
                     errorMessage.value =""
                     quoteDailyList.value += dailyItem
@@ -61,7 +63,6 @@ class HomeViewModel @Inject constructor(
                 }
                 else -> Unit
             }
-
         }
     }
 }
